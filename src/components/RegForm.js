@@ -1,7 +1,8 @@
 import React from 'react'
-import { Formik, Form } from 'formik'
+import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import RegControl from './RegControl'
+import TextError from './TextError'
 
 function RegForm() {
     const dropdownOptions = [
@@ -61,7 +62,7 @@ function RegForm() {
 
         <div class="container">
             <div class="form-container">
-                <div><h1><center>Student Registration</center></h1></div>
+                <div class='heading'>Student Registration</div>
                 <Formik
                     initialValues={initialValues}
                     validationSchema={validationSchema}
@@ -69,8 +70,17 @@ function RegForm() {
                     {
                         formik => (
                             <Form>
-                                <RegControl control='input' type='text' label='First name' name='name.fname' className='form-control' placeholder='Enter your first name' />
-                                <RegControl control='input' type='text' label='Last name' name='name.lname' className='form-control' placeholder='Enter your last name' />
+                                <div className='form-control'>
+                                    <label htmlFor='name.fname'>First name</label>
+                                    <Field id='name.fname' name='name.fname' type='text' className='form-control' placeholder='Enter your first name' />
+                                    <ErrorMessage name='name.fname' component={TextError} />
+                                </div>
+
+                                <div className='form-control'>
+                                    <label htmlFor='name.lname'>Last name</label>
+                                    <Field id='name.lname' name='name.lname' type='text' className='form-control' placeholder='Enter your last name' />
+                                    <ErrorMessage name='name.lname' component={TextError} />
+                                </div>
 
                                 <RegControl control='date' label='DOB' name='birthDate' placeholderText='Enter your date of birth' />
 
